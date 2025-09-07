@@ -1,0 +1,51 @@
+/**********************************************************************
+  
+  Program Title : Demonstrating Type Conversion in Java
+  File Name: "TypeConversion.java"
+  
+  Programmer : Sathish Sarma
+  Contact Details : sathish.sarma@newinti.edu.my
+  Date : 04 September 2025
+  
+ **********************************************************************/
+ 
+public class TypeConversion {
+    public static void main(String[] args) {
+        
+        // Widening (Implicit Conversion) - small type → big type
+        int intVar1 = 100;                  // int (4 bytes)
+        double doubleVar1 = intVar1 + 2.00; // int 自动提升为 double
+        
+        System.out.println("Widening (Implicit Conversion):");
+        System.out.println("Integer value: " + intVar1 + " (Size: " + (Integer.SIZE / 8) + " bytes)");
+        System.out.println("Result after implicit conversion from int to double: " + doubleVar1 
+                           + " (Size: " + (Double.SIZE / 8) + " bytes)");
+
+        
+        // Narrowing (Explicit Conversion / Type Casting) - big type → small type
+        double doubleVar2 = 99.99; 
+        double doubleVar3 = doubleVar2 + 1;     // 正常运算 (还是 double)
+        int intVar3 = (int) doubleVar2 + 1;     // 强制转换 double → int，截断小数部分
+        
+        System.out.println("\nNarrowing (Explicit Conversion):");
+        System.out.println("Double value: " + doubleVar2 + " (Size: " + (Double.SIZE / 8) + " bytes)");
+        System.out.println("Result after calculate without conversion: " + doubleVar3 
+                           + " (Size: " + (Double.SIZE / 8) + " bytes)");
+        System.out.println("Result after explicit conversion from double to int: " + intVar3 
+                           + " (Size: " + (Integer.SIZE / 8) + " bytes)");
+
+        
+        // Conversion between char and int
+        char letter = 'A';               // character
+        int asciiValue = letter;         // 隐式转换 (char → int, 得到 ASCII 值)
+        System.out.println("\nChar to Int Conversion:");
+        System.out.println("Character: " + letter + " (Size: " + (Character.SIZE / 8) + " bytes)");
+        System.out.println("ASCII value: " + asciiValue + " (Size: " + (Integer.SIZE / 8) + " bytes)");
+
+        int number = 66;
+        char convertedChar = (char) number; // 强制转换 (int → char)
+        System.out.println("\nInt to Char Conversion:");
+        System.out.println("Integer: " + number + " (Size: " + (Integer.SIZE / 8) + " bytes)");
+        System.out.println("Converted to char: " + convertedChar + " (Size: " + (Character.SIZE / 8) + " bytes)");
+    }
+}
