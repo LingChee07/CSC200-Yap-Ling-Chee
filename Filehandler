@@ -1,0 +1,61 @@
+ 1  import java.io.*;
+ 2  import java.util.*;
+ 3
+ 4  public class FileHandler {
+ 5
+ 6      private static final String FILE_NAME = "accounts.txt";
+ 7
+ 8      // SAVE accounts to file
+ 9      public static void saveAccounts(ArrayList<MainAcc> accounts) {
+10          try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+11
+12              for (MainAcc acc : accounts) {
+13                  String type = (acc instanceof SavingAcc) ? "Saving" : "Current";
+14                  writer.write(type + "," + acc.acc_num + "," + acc.acc_name + "," + acc.acc_bal);
+15                  writer.newLine();
+16              }
+17
+18              System.out.println(">> Accounts saved successfully!");
+19
+20          } catch (IOException e) {
+21              System.out.println(">> Error saving accounts: " + e.getMessage());
+22          }
+23      }
+24
+25      // LOAD accounts from file
+26      public static ArrayList<MainAcc> loadAccounts() {
+27          ArrayList<MainAcc> accounts = new ArrayList<>();
+28          File file = new File(FILE_NAME);
+29
+30          if (!file.exists()) {
+31              System.out.println(">> No existing account file found. Starting fresh.");
+32              return accounts;
+33          }
+34
+35          try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+36              String line;
+37
+38              while ((line = reader.readLine()) != null) {
+39                  String[] parts = line.split(",");
+40
+41                  String type = parts[0];
+42                  String num = parts[1];
+43                  String name = parts[2];
+44                  double bal = Double.parseDouble(parts[3]);
+45
+46                  if (type.equals("Saving")) {
+47                      accounts.add(new SavingAcc(num, name, bal));
+48                  } else {
+49                      accounts.add(new CurrentAcc(num, name, bal));
+50                  }
+51              }
+52
+53              System.out.println(">> Accounts loaded successfully!");
+54
+55          } catch (IOException e) {
+56              System.out.println(">> Error loading accounts: " + e.getMessage());
+57          }
+58
+59          return accounts;
+60      }
+61  }
