@@ -1,35 +1,8 @@
-import java.util.List;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class MiniBankingSystem {
-    // Central data structure to hold all accounts in memory [cite: 79]
-    private List<Account> accounts = new ArrayList<>(); 
 
-    public void startSystem() {
-        // 1. Load data at startup
-        this.accounts = AccountFileHandler.loadAccountsFromFile();
 
-        // Start menu loop here...
-        // ... (Call menu display method, get user choice)
-    }
 
-    // Example transaction method
-    public void performDeposit(String accNum, double amount) {
-        // Find account in the 'accounts' list...
-        // ...
-        // acc.deposit(amount);
-
-        // 2. Save data after transaction [cite: 80]
-        AccountFileHandler.saveAccountsToFile(this.accounts);
-    }
-    
-    // Call this method before the program exits
-    public void exitSystem() {
-        AccountFileHandler.saveAccountsToFile(this.accounts); // Ensure all changes are written to file [cite: 50]
-        System.out.println("System shut down. Thank you for banking with CityBank Solutions.");
-    }
-
-    public static void main(String[] args) {
-        new MiniBankingSystem().startSystem();
-    }
-}
+  
